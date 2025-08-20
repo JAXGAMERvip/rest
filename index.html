@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 320px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background: #4facfe;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #00c6fb;
+    }
+    .settings-btn {
+      margin-top: 0.5rem;
+      background: #888;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      width: 300px;
+      text-align: center;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <button id="settingsBtn" class="settings-btn">Settings</button>
+  </div>
+
+  <div class="modal" id="settingsModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Settings</h3>
+      <p>Settings panel placeholder.</p>
+    </div>
+  </div>
+
+<script>
+document.getElementById("loginBtn").addEventListener("click", function(e){
+  e.preventDefault();
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  if(user === "" || pass === ""){
+    alert("❌ Please enter username and password.");
+    return;
+  }
+  if(user === "jax" && pass === "1"){
+    alert("✅ Logged in successfully as " + user);
+    window.location.href = "reset.html";
+  } else {
+    alert("❌ Invalid username or password.");
+  }
+});
+
+// Settings modal
+const modal = document.getElementById("settingsModal");
+document.getElementById("settingsBtn").onclick = ()=>{ modal.style.display = "flex"; };
+document.getElementById("closeModal").onclick = ()=>{ modal.style.display = "none"; };
+window.onclick = (e)=>{ if(e.target == modal) modal.style.display = "none"; };
+</script>
+</body>
+</html>
