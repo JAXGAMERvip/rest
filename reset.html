@@ -54,16 +54,31 @@
     <button id="resetBtn">Reset</button>
   </div>
 
-<script>
-document.getElementById("resetBtn").addEventListener("click", function(e){
-  e.preventDefault();
-  const targetUser = document.getElementById("resetUser").value.trim();
-  if(targetUser === ""){
-    alert("❌ Please enter a username.");
-    return;
-  }
-  alert("✅ HWID Reset Done for user: " + targetUser);
-});
-</script>
+  <script src="KeyAuth.js"></script>
+  <script>
+    const KeyAuthApp = new KeyAuth({
+      name: "jax-vip",
+      ownerid: "UfigTqVurt",
+      version: "1.6"
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", function(e){
+      e.preventDefault();
+      const targetUser = document.getElementById("resetUser").value.trim();
+      if(targetUser === ""){
+        alert("❌ Please enter a username.");
+        return;
+      }
+      KeyAuthApp.resetUserHWID(targetUser).then(success => {
+        if(success){
+          alert("✅ HWID Reset Done for user: " + targetUser);
+        } else {
+          alert("❌ Failed to reset HWID.");
+        }
+      }).catch(err => {
+        alert("❌ Error: " + err);
+      });
+    });
+  </script>
 </body>
 </html>
