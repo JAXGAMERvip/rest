@@ -54,6 +54,7 @@
     <button id="resetBtn">Reset</button>
   </div>
 
+  <!-- Import official KeyAuth SDK here -->
   <script src="KeyAuth.js"></script>
   <script>
     const KeyAuthApp = new KeyAuth({
@@ -69,11 +70,11 @@
         alert("❌ Please enter a username.");
         return;
       }
-      KeyAuthApp.resetUserHWID(targetUser).then(success => {
-        if(success){
+      KeyAuthApp.resetUserHWID(targetUser).then(resp => {
+        if(resp.success){
           alert("✅ HWID Reset Done for user: " + targetUser);
         } else {
-          alert("❌ Failed to reset HWID.");
+          alert("❌ " + resp.message);
         }
       }).catch(err => {
         alert("❌ Error: " + err);

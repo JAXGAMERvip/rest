@@ -55,6 +55,7 @@
     <button id="loginBtn">Login</button>
   </div>
 
+  <!-- Import official KeyAuth SDK here -->
   <script src="KeyAuth.js"></script>
   <script>
     const KeyAuthApp = new KeyAuth({
@@ -71,13 +72,12 @@
         alert("❌ Please enter username and password.");
         return;
       }
-      // Call KeyAuth login
-      KeyAuthApp.login(user, pass).then(success => {
-        if(success){
+      KeyAuthApp.login(user, pass).then(resp => {
+        if(resp.success){
           alert("✅ Logged in successfully as " + user);
           window.location.href = "reset.html";
         } else {
-          alert("❌ Invalid username or password.");
+          alert("❌ " + resp.message);
         }
       }).catch(err => {
         alert("❌ Error: " + err);
